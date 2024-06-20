@@ -18,4 +18,5 @@ jobs:
           --d
 
       - name: Directory content
-        run ls -l
+        run: |
+          ls -l
