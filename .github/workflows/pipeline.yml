@@ -21,6 +21,7 @@ jobs:
         run: npm run build
       - name: test
         run: npm test
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Run flyctl deploy --remote-only
         run: flyctl deploy --remote-only
         env:
