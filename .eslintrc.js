@@ -25,8 +25,11 @@ module.exports = {
     'no-trailing-spaces': 'error',
     'object-curly-spacing': ['error', 'always'],
     'arrow-spacing': ['error', { before: true, after: true }],
-    'no-console': 'warn',       // error/warn; silence specific logs if needed
+    'no-console': 'warn', // error/warn; silence specific logs if needed
     'no-unused-vars': ['warn'],
-    'react/prop-types': 0
-  }
+    'react/prop-types': 0,
+  },
+  settings: {
+    react: { version: 'detect' }, // ← fixes the warning
+  },
 }
