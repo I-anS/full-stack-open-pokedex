@@ -44,3 +44,33 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+
+  notify:
+    needs: [simple_deployment_pipeline]
+    if: ${{ always() && github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      # ✅ success message
+      - name: Discord success
+        if: success()
+        uses: rjstone/discord-webhook-notify@v2
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: info
+          title: "Deploy succeeded"
+          description: |
+            to https://fso-pokedex-ian.fly.dev/
+            **Deployed by:** @${{ github.actor }}
+
+      # 🛑 failure message
+      - name: Discord failure
+        if: failure()
+        uses: rjstone/discord-webhook-notify@v2
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: error
+          title: "Build/Deploy failed"
+          description: |
+            **Branch:** `${{ github.ref_name }}`
+            **Broken by (author):** ${{ github.event.head_commit.author.username || github.event.head_commit.author.name }}
+            **Pusher:** @${{ github.actor }}
