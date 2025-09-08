@@ -62,7 +62,7 @@ jobs:
             to https://fso-pokedex-ian.fly.dev/
             **Deployed by:** @${{ github.actor }}
 
-      # failure messages
+      # failure message
       - name: Discord failure
         if: failure()
         uses: rjstone/discord-webhook-notify@v2
