@@ -50,7 +50,7 @@ jobs:
     if: ${{ always() && github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
-      # ✅ success message
+      # success message
       - name: Discord success
         if: success()
         uses: rjstone/discord-webhook-notify@v2
@@ -62,7 +62,7 @@ jobs:
             to https://fso-pokedex-ian.fly.dev/
             **Deployed by:** @${{ github.actor }}
 
-      # 🛑 failure message
+      # failure message
       - name: Discord failure
         if: failure()
         uses: rjstone/discord-webhook-notify@v2
